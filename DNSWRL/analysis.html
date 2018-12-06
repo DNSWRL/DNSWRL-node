@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>D-NSWRL</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="src/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="main">
+
+  <table >
+    <tr>
+    <td colspan="2" style="background-color:rgb(255, 255, 255);">
+    <h3 >输入症状</h3>
+    <textarea id="input1" name="input1" rows="5" cols="100" placeholder="请输入您的症状"></textarea>
+    <br>
+    <input class="myForm" type="submit" value="提交" > 
+    </td>
+    </tr>
+    <tr>
+    <td id="otherSymptoms">
+    </td>
+    </tr>
+    <tr>
+    <td id="otherExamination">
+
+    </td>
+    <tr style="background-color:#ffffff;height:200px;width:400px;vertical-align:top;">
+        <td style="background-color:rgb(255, 255, 255);">
+            <h3>检查结果</h3>
+            <textarea id="output1" rows="5" cols="100" placeholder="您的症状是"></textarea>
+    </td>
+</tr>
+    </tr>
+    
+</table>        
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $(".myForm").on('click', function(){
+            var input1 = $("textarea").val();
+            $.post("http://127.0.0.1:8081/analysis",{
+                input1:input1
+            },function(res){
+                if(res.status=="1"){
+                    $("#otherSymptoms").html(res.otherSymptoms);
+                    $("#otherExamination").html(res.otherExamination);
+                    $("#output1").html('可能疾病：季节性过敏性鼻炎；鼻炎；禽流感；鼻鼽；柯萨奇病毒和埃可病毒感染');
+                }else{
+                    $("#output1").html("我也不知道什么病");
+                }
+                $(".coForm").on('click', function(){
+                    $("#output1").html('分析结果：鼻炎');
+                })
+            })
+        })
+    })
+
+</script>
+
+</body>
+</html>
