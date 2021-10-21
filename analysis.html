@@ -42,7 +42,7 @@
         $(".myForm").on('click', function(){
             
             var input0 = $("#input0").val();
-            $.post("http://127.0.0.1:8081/analysis",{
+            $.post("http://127.0.0.1:8088/analysis",{
                 status:"1",
                 input0:input0
             },function(res){
@@ -64,7 +64,7 @@
                     var input6 = $("input[name='input6']:checked").val();
                     var input7 = $("input[name='input7']:checked").val();
 
-                    $.post("http://127.0.0.1:8081/analysis",{
+                    $.post("http://127.0.0.1:8088/analysis",{
                         status:"2",
                         input1:input1,
                         input2:input2,

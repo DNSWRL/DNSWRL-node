@@ -1,7 +1,7 @@
 var express = require('express'); //导包 处理网络请求
 var path = require('path');//访问文件路径
 var bodyParser = require('body-parser');//给网络请求传参
-var jieba = require('nodejieba');//分词
+// var jieba = require('nodejieba');//分词
  
 from_submit();
 
@@ -16,9 +16,9 @@ function analys(status,input) {
     anwser = new result();
 
     console.log(input);
-    jieba.load({
-        userDict: __dirname + '/data/disease.utf8',
-    });
+    // jieba.load({
+    //     userDict: __dirname + '/data/disease.utf8',
+    // });
 
     // console.log(jieba.cutSmall(input,3));
     // console.log(jieba.cut(input));
@@ -60,7 +60,7 @@ function from_submit() {
             input0 = req.body.input0;
             
             ans = analys(1, input0);
-            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8081');
+            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8088');
             res.send({
                 res1:ans.res,
                 status:ans.status,
@@ -81,7 +81,7 @@ function from_submit() {
             inputAll = input0+":"+input;
             ans2 = analys(req.body.status, input);
             console.log(ans2);
-            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8081');
+            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8088');
             res.send({
                 inputAll:inputAll,
                 result:ans2.res
@@ -93,7 +93,7 @@ function from_submit() {
         
     })
 
-    var server = app.listen(8081, function () {
+    var server = app.listen(8088, function () {
         var host = server.address().address;
         var port = server.address().port;
         console.log("looking://%s:%s", host, port);
